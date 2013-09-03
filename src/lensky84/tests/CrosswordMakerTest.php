@@ -1,7 +1,7 @@
 <?php
 namespace lensky84\test;
 
-use lensky84;
+use lensky84\CrosswordMaker;
 
 
 require_once('../../../vendor/autoload.php');
@@ -17,14 +17,14 @@ class CrosswordMakerTest extends \BaseTest
      */
     protected function setUpCrossword()
     {
-        $this->crosswordMaker = new \lensky84\CrosswordMaker();
+        $this->crosswordMaker = new CrosswordMaker();
     }
 
     public function testCrosswordMaker()
     {
         $datas = self::provider();
         foreach ($datas as $key => $data) {
-            if ($key == 3) {
+            if ($key == 0) {
                 parent::testCrosswordMaker($data[0], $data[1]);
             }
         }

@@ -7,15 +7,6 @@ namespace lensky84;
  */
 class Word
 {
-    const ORIENTATION_HORIZONTAL = 1;
-
-    const ORIENTATION_VERTICAL = 2;
-    const PAIR_1_2 = 1;
-    const PAIR_1_3 = 2;
-    const PAIR_2_4 = 3;
-    const PAIR_4_5 = 4;
-    const PAIR_3_6 = 5;
-
     /**
      * @var null $index
      */
@@ -26,15 +17,6 @@ class Word
      */
     protected $word;
 
-    /**
-     * @var int $pair
-     */
-    protected $pair = 0;
-
-    /**
-     * @var int $orientation
-     */
-    protected $orientation = self::ORIENTATION_HORIZONTAL;
 
     /**
      * Constructor
@@ -66,56 +48,6 @@ class Word
     public function getWord ()
     {
         return $this->word;
-    }
-
-    /**
-     * Get orientation
-     *
-     * @return int
-     */
-    public function getOrientation()
-    {
-        return $this->orientation;
-    }
-
-    /**
-     * Set pair
-     *
-     * @param int $pair Pair
-     */
-    public function setPair($pair)
-    {
-        $this->pair = $pair;
-    }
-
-    /**
-     * Get pair
-     *
-     * @return int
-     */
-    public function getPair()
-    {
-        return $this->pair;
-    }
-
-    /**
-     * Is set pair
-     *
-     * @return bool
-     */
-    public function isSetPair()
-    {
-        return (bool) $this->pair;
-    }
-
-    /**
-     * Set orientation
-     *
-     * @param int $orientation
-     */
-    public function setOrientation ($orientation)
-    {
-        $this->orientation = $orientation;
     }
 
     /**
