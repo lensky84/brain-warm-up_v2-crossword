@@ -190,9 +190,37 @@ class CrosswordMaker
         if (count($this->pairs[self::PAIR_1_2]) > 1) {
             $this->chooseVariant();
         }
-        for ($row = 1; $row <= $this->getMatrixWidth(); $row++) {
-            for ($line = 1; $line <= $this->getMatrixWidth(); $line++) {
+        for ($row = 1; $row <= $this->getMatrixHeight(); $row++) {
+            for ($column = 1; $column <= $this->getMatrixWidth(); $column++) {
+                $pair12 = reset($this->pairs[self::PAIR_1_2]);
+                $pair13 = reset($this->pairs[self::PAIR_1_3]);
+                $pair24 = reset($this->pairs[self::PAIR_2_4]);
+                $pair45 = reset($this->pairs[self::PAIR_4_5]);
+                $pair36 = reset($this->pairs[self::PAIR_3_6]);
 
+                if (($row == 1) && ($column <= $pair12[0]->getLength())) {
+                    $this->crossword[$row][$column] = $pair12[0]->getChar($column);
+                } elseif (($row == 1) && ($column > $pair12[0]->getLength())) {
+                    $this->crossword[$row][$column] = '.';
+                } elseif (($row > 1) && ($row < $pair12[1]->getLength()) && ($column == 1)) {
+                    $this->crossword[$row][$column] = $pair12[1]->getChar($row);
+                } elseif (($row > 1) && ($row < $pair12[1]->getLength()) && ($column == $pair12[0]->getLength())) {
+                    $this->crossword[$row][$column] = $pair13[1]->getChar($row);
+                } elseif (($row > 1) && ($row < $pair12[1]->getLength()) && ($column != $pair12[0]->getLength())) {
+                    $this->crossword[$row][$column] = '.';
+                } elseif ($row == $pair12[1]->getLength()) {
+                    $this->crossword[$row][$column] = $pair24[1]->getChar($column);
+                } elseif (($row > $pair12[1]->getLength()) && ($row < $pair13[1]->getLength()) && ($column == $pair12[0]->getLength())) {
+                    $this->crossword[$row][$column] = $pair13[1]->getChar($row);
+                } elseif (($row > $pair12[1]->getLength()) && ($row < $pair13[1]->getLength()) && ($column == $pair24[1]->getLength())) {
+                    $this->crossword[$row][$column] = $pair45[1]->getChar($row - $pair12[1]->getLength() + 1);
+                } elseif (($row > $pair12[1]->getLength()) && ($row < $pair13[1]->getLength()) && ($column < $pair24[1]->getLength())) {
+                    $this->crossword[$row][$column] = '.';
+                } elseif (($row == $pair13[1]->getLength()) && ($column >= $pair12[0]->getLength())) {
+                    $this->crossword[$row][$column] = $pair36[1]->getChar($column - $pair12[0]->getLength() + 1);
+                } elseif (($row == $pair13[1]->getLength()) && ($column < $pair12[0]->getLength())) {
+                    $this->crossword[$row][$column] = '.';
+                }
             }
         }
     }

@@ -24,7 +24,7 @@ class CrosswordMakerTest extends \BaseTest
     {
         $datas = self::provider();
         foreach ($datas as $key => $data) {
-            if ($key == 0) {
+            if ($key == 1) {
                 parent::testCrosswordMaker($data[0], $data[1]);
             }
         }
