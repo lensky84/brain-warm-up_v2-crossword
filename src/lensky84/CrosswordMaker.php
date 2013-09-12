@@ -24,11 +24,6 @@ class CrosswordMaker
     protected $crossword = array();
 
     /**
-     * @var array $pairs Pairs of words
-     */
-    protected $pairs = array();
-
-    /**
      * @var int $maxLength
      */
     protected $maxLength = 0;
