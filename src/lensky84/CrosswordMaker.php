@@ -8,11 +8,6 @@ namespace lensky84;
  */
 class CrosswordMaker
 {
-    const PAIR_1_2 = 1;
-    const PAIR_1_3 = 2;
-    const PAIR_2_4 = 3;
-    const PAIR_4_5 = 4;
-    const PAIR_3_6 = 5;
     /**
      * @var array $words Words
      */
