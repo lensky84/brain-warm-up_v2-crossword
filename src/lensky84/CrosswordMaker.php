@@ -33,6 +33,10 @@ class CrosswordMaker
      */
     protected $maxLength = 0;
 
+    protected $topPairs = array();
+
+    protected $bottomPairs = array();
+
     /**
      * Generate
      *
@@ -48,6 +52,52 @@ class CrosswordMaker
         $this->generateCrossword();
 
         return $crosswordStr;
+    }
+
+    public function getCornerPairs()
+    {
+        foreach ($this->words as $word) {
+            if ($word->getLength() == $this->maxLength) {
+                continue;
+            }
+            foreach ($this->words as $word2) {
+                if (($word2->getLength() == $this->maxLength) || ($word->compareWords($word2))) {
+                    continue;
+                }
+                if ($word->compareFirstFirst($word2)) {
+                    $this->topPairs[] = array($word, $word2);
+                }
+                if ($word->compareLastLast($word2)) {
+                    $this->bottomPairs[] = array($word, $word2);
+                }
+            }
+        }
+        if (empty($this->topPairs) || empty($this->bottomPairs)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    protected function getVertical()
+    {
+        foreach ($this->words as $word) {
+            if ($word->getLength() != $this->maxLength) {
+                continue;
+            }
+            foreach ($this->topPairs as $topPair) {
+                if (!$word->compareFirstLast($topPair[0])) {
+                    continue;
+                }
+                foreach ($this->bottomPairs as $bottomPair) {
+                    if (!$bottomPair[1]->compareFirstLast($word)) {
+                        continue;
+                    }
+                    $this->verticals[] = $word;
+                }
+            }
+        }
+
     }
 
     /**
